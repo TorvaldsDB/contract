@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>开始时间</th>
+      <th>结束时间</th>
+      <th>价格</th>
+      <th>租期</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rent_phases.each do |rent_phase| %>
+      <tr>
+        <td><%= rent_phase.start_date %></td>
+        <td><%= rent_phase.end_date %></td>
+        <td><%= rent_phase.price %></td>
+        <td><%= rent_phase.cycles %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

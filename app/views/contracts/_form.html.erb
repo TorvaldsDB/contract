@@ -1,0 +1,62 @@
+<%= nested_form_for(@contract) do |f| %>
+  <% if @contract.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
+
+      <ul>
+      <% @contract.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :descrption %><br>
+    <%= f.text_area :descrption %>
+  </div>
+  <div>
+    <%= f.fields_for :rent_phases do |rent_phase_form| %>
+      <%= rent_phase_form.label :start_date %>:
+      <%= rent_phase_form.text_field :start_date, { class: 'js_datepicker' }%>
+      <%= rent_phase_form.label :end_date %>:
+      <%= rent_phase_form.text_field :end_date, { class: 'js_datepicker' }%>
+      <%= rent_phase_form.label :price %>:
+      <%= rent_phase_form.text_field :price %>
+      <%= rent_phase_form.label :cycles %>:
+      <%= rent_phase_form.text_field :cycles %>
+      <%= rent_phase_form.link_to_remove "Remove this rent_phase" %>
+    <% end %>
+    <p><%= f.link_to_add "Add a rent_phase", :rent_phases %></p>
+  </div>
+
+  <div>
+    <%= f.fields_for :invoices do |invoice_form| %>
+      <%= invoice_form.label :start_date %>:
+      <%= invoice_form.text_field :start_date %>
+      <%= invoice_form.label :end_date %>:
+      <%= invoice_form.text_field :end_date %>
+      <%= invoice_form.label :due_date %>:
+      <%= invoice_form.text_field :due_date %>
+      <%= invoice_form.label :total %>:
+      <%= invoice_form.text_field :total %>
+      <%= invoice_form.link_to_remove "Remove this invoice" %>
+    <% end %>
+    <p><%= f.link_to_add "Add a invoice", :invoices %></p>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
